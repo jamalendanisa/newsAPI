@@ -32,7 +32,7 @@ With data :
 
 ### Retrieve All News
 ```
-GET https://idealump-newsapi.cleverapps.io/news/
+GET https://idealump-newsapi.cleverapps.io/news/?page={page}&limit={limit}
 ```
 
 ### Retrieve a single News with id
