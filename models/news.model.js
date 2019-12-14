@@ -44,8 +44,13 @@ News.findById = (id, result) => {
 };
 
 // Retrieve all News
-News.getAll = result => {
-  sql.query("SELECT * FROM news", (err, res) => {
+News.getAll = (page, limit, result)=> {
+  page = parseInt(page);
+  limit = parseInt(limit);
+  
+  sql.query("SELECT * FROM news ORDER BY id DESC limit ? OFFSET ?",
+  [limit, page],
+  (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

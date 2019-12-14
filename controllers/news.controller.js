@@ -31,7 +31,7 @@ exports.create = (req, res) => {
  
 // Retrieve all News from the database.
 exports.findAll = (req, res) => {
-  News.getAll((err, data) => {
+  News.getAll(req.query.page, req.query.limit, (err, data) => {
     if (err)
       res.status(500).send({
         message:
