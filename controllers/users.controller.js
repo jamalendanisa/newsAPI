@@ -28,7 +28,6 @@ exports.access = (req, res) => {
 // Create and Save a new User
 exports.create = (req, res) => {
   // Validate request
-  console.log(req.body)
   if (!req.body) {
     res.status(400).send({
       message: "Content can not be empty!"

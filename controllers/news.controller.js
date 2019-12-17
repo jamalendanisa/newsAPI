@@ -26,6 +26,7 @@ exports.create = (req, res) => {
     }
     else { 
       delete req.session.error;
+      if (data.id)
       req.session.newNewsId = parseInt(data.id) + 1;
       res.redirect('/addnews');
     }
@@ -41,7 +42,10 @@ exports.findAll = (req, res) => {
           err.message || "Some error occurred while retrieving news."
       });
     else { 
-      req.session.newNewsId = parseInt(data.rows[0].id) + 1;
+      if (data.rows.length !== 0)
+        req.session.newNewsId = parseInt(data.rows[0].id) + 1;
+      else
+        req.session.newNewsId = 1;
       res.send(data);
     }
   });
@@ -62,7 +66,6 @@ exports.findOne = (req, res) => {
       }
     } else { 
       req.session.newsOne = data
-      console.log( req.session.newsOne)
       res.send(data); 
     }
   });
