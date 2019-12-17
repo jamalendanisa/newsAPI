@@ -16,7 +16,6 @@ User.findOne = (email, result) => {
     }
     
     if (res.length) {
-      console.log("found user: ", res[0]);
       result(null, res[0]);
       return;
     }
@@ -35,7 +34,6 @@ User.create = (user, result) => {
       return;
     }
 
-    console.log("created user: ", { id: res.insertId, ...user });
     result(null, { id: res.insertId, ...user });
   });
 };

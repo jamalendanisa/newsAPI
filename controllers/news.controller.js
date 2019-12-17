@@ -20,24 +20,30 @@ exports.create = (req, res) => {
 
   // Save News in the database
   News.create(news, (err, data) => {
-    if (err)
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the News."
-      });
-    else res.send(data);
+    if (err) {
+      req.session.error = 'Error adding news. Please try again.';
+      res.redirect('/addnews');
+    }
+    else { 
+      delete req.session.error;
+      req.session.newNewsId = parseInt(data.id) + 1;
+      res.redirect('/addnews');
+    }
   });
 };
  
 // Retrieve all News from the database.
 exports.findAll = (req, res) => {
-  News.getAll(req.query.page, req.query.limit, (err, data) => {
+  News.getAll(req.query.page, req.query.limit, req.query.search, (err, data) => {
     if (err)
       res.status(500).send({
         message:
           err.message || "Some error occurred while retrieving news."
       });
-    else res.send(data);
+    else { 
+      req.session.newNewsId = parseInt(data.rows[0].id) + 1;
+      res.send(data);
+    }
   });
 };
 
@@ -54,7 +60,11 @@ exports.findOne = (req, res) => {
           message: "Error retrieving News with id " + req.params.id
         });
       }
-    } else res.send(data);
+    } else { 
+      req.session.newsOne = data
+      console.log( req.session.newsOne)
+      res.send(data); 
+    }
   });
 };
 
@@ -87,11 +97,13 @@ exports.update = (req, res) => {
             message: `Not found News with id ${req.params.id}.`
           });
         } else {
-          res.status(500).send({
-            message: "Error updating News with id " + req.params.id
-          });
+          req.session.error = 'Error editing news. Please try again.';
+          res.redirect('/addnews');
         }
-      } else res.send(data);
+      } else { 
+          delete req.session.error;
+          res.redirect('/'); 
+      }
     }
   );
 };
@@ -105,10 +117,12 @@ exports.delete = (req, res) => {
           message: `Not found News with id ${req.params.id}.`
         });
       } else {
-        res.status(500).send({
-          message: "Could not delete News with id " + req.params.id
-        });
+        req.session.error = 'Error deleting news. Please try again.';
+        res.send(data); 
       }
-    } else res.send({ message: "News was deleted successfully!" });
+    } else {
+      delete req.session.error;
+      res.send(data); 
+    } 
   });
 };

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta charset="utf-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/login.css">
+  </head>
+  <body>
+    <div class="login-container">
+	  <div class="login-box">
+		<div class="round1"></div>
+        <div class="round2"></div>
+        <div class="login-title">Login</div>
+        <div class="login-subtitle">Enter your details below to continue</div>
+        <div class="warning">{{message}}</div>
+        <form id="loginForm" action="/login" method="POST">
+		  <div class="form__group">
+            <input type="email" id="email" name="email" class="form__field" 
+              placeholder="Email" required onkeyup="checkForm()">
+            <label for="email" class="form__label">Email</label>
+          </div>
+		  <div class="form__group">
+            <input type="password" id="password" name="password" class="form__field" 
+              placeholder="Password" required onkeyup="checkForm()">
+            <label for="password" class="form__label">Password</label>
+          </div>
+          <div onClick="forgotPassword()" class="login-subtitle forgot-pass">Forgot password ></div>
+			<button id="loginButton" class="login-button ripple" type="submit" disabled>Login</button>
+		</form>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="/js/login.js"></script>
+  </body>
+</html>

@@ -1,10 +1,46 @@
-# News API
+# CMS News
 
-## This is API Service for **News App**
+## This is Client and API Service for **CMS News App**
+
+## Client Side
 
 ### Login User
 ```
-POST https://idealump-newsapi.cleverapps.io/login/
+ https://idealump-news.cleverapps.io/
+```
+Login with data :
+```
+{ "email":"your@email.com",
+  "password":"yourpassword"
+}
+```
+
+### NEWS LIST
+```
+ https://idealump-news.cleverapps.io/
+```
+
+### ADD NEWS
+```
+ https://idealump-news.cleverapps.io/addnews
+```
+
+### EDIT NEWS
+```
+ https://idealump-news.cleverapps.io/editnews/:id
+```
+
+### DELETE NEWS
+```
+DELETE NEWS https://idealump-news.cleverapps.io/delete/news/:id
+```
+
+
+## API Services
+
+### Login User
+```
+POST https://idealump-news.cleverapps.io/login/
 ```
 With data :
 ```
@@ -15,12 +51,13 @@ With data :
 
 ### Logout
 ```
-GET https://idealump-newsapi.cleverapps.io/logout/
+GET https://idealump-news.cleverapps.io/logout/
 
 ```
+
 ### Create User
 ```
-GET https://idealump-newsapi.cleverapps.io/users/
+POST https://idealump-news.cleverapps.io/users/
 ```
 With data :
 ```
@@ -30,21 +67,20 @@ With data :
 }
 ```
 
-### Retrieve All News
+### Retrieve News
 ```
-GET https://idealump-newsapi.cleverapps.io/news/
+GET https://idealump-news.cleverapps.io/news/?limit=?&page=?&search=?
 ```
 
-### Retrieve a single News with id
+### Retrieve a News with id
 ```
-GET https://idealump-newsapi.cleverapps.io/news/:id
+GET https://idealump-news.cleverapps.io/news/:id
 ```
 
 ### Create a new News
 ```
-POST https://idealump-newsapi.cleverapps.io/news/
+POST https://idealump-news.cleverapps.io/news/
 ```
-
 With data :
 ```
 { "id":"1",
@@ -57,9 +93,8 @@ With data :
 
 ### Update a News with id
 ```
-PUT https://idealump-newsapi.cleverapps.io/news/:id
+POST https://idealump-news.cleverapps.io/news/:id
 ```
-
 With data :
 ```
 { "id":"1",
@@ -72,7 +107,7 @@ With data :
 
 ### Delete a News with id
 ```
-DELETE https://idealump-newsapi.cleverapps.io/news/:id
+GET https://idealump-news.cleverapps.io/delete/news/:id
 ```
 
 ***The database's environment is for deployment on the cloud purpose. 

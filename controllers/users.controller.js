@@ -2,24 +2,25 @@ const User = require("../models/users.model.js");
 
 // Login User
 exports.access = (req, res) => {
-  console.log(req.body)
   User.findOne(req.body.email, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
-        res.status(404).send({
-          message: `Not found User with email ${req.body.email}. Login failed.`
-        });
+        req.session.error = 'User not found';
+        res.redirect('/');
       } else {
-        res.status(500).send({
-          message: "Error retrieving User. Login failed. " + req.body.email
-        });
+        req.session.error = 'Error retrieving User. Please try again.';
+        res.redirect('/');
       }
     } else {
-      if (data.password !== Buffer.from(req.body.password).toString('base64')) {
-        res.status(400).send({
-          message: "Wrong Password"
-        });
-      } else res.send(data);
+      if (data.password !== Buffer.from(req.body.password).toString('base64')) {  
+        req.session.error = 'Wrong password';
+        res.redirect('/');
+      } else {
+        delete req.session.error;
+        req.session.loggedin = true;
+        req.session.username = data.username;
+				res.redirect('/');
+      }
     }
   });
 };

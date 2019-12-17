@@ -1,7 +1,7 @@
 const mysql = require("mysql");
 
 // Use this config env to run this application locally
-//  const dbConfig = require("../config/db.config.js");
+// const dbConfig = require("../config/db.config.js");
 // const connection = mysql.createConnection({
 //   host: dbConfig.HOST,
 //   user: dbConfig.USER,
@@ -9,7 +9,7 @@ const mysql = require("mysql");
 //   database: dbConfig.DB
 // }); 
 
-// Create a connection to the database
+Create a connection to the database
 const connection = mysql.createConnection({
   host     : process.env.MYSQL_ADDON_HOST,
   database : process.env.MYSQL_ADDON_DB,

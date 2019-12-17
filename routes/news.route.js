@@ -11,9 +11,9 @@ module.exports = app => {
   app.get("/news/:id", news.findOne);
 
   // Update a News with id
-  app.put("/news/:id", news.update);
+  app.post("/news/:id", news.update);
 
   // Delete a News with id
-  app.delete("/news/:id", news.delete);
+  app.get("/delete/news/:id", news.delete);
 
 };

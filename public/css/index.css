@@ -1,0 +1,166 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+html {
+  font-family: 'Roboto', sans-serif !important;
+}
+
+body {
+  margin: 0 !important;
+}
+
+
+/* Page */
+#loader {
+  z-index: 100;
+  position: fixed;
+  width: 100%;
+  padding: 15% 41%;
+  height: 100%;
+}
+.menu-title {
+  font-size: 22px;
+  color: #3fafbbf5;
+}
+
+.content-container {
+  background: white;
+  margin-top: 20px;
+  padding: 20px;
+  min-height: 450px;
+  min-width: 430px;
+  border-radius: 4px;
+  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.hide {
+  display: none;
+}
+.show {
+  display: block;
+}
+
+
+
+/* Form */
+
+.form__group {
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 10px;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #d2d2d2;
+  outline: 0;
+  font-size: 16px;
+  color: #666;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+
+.form__field::placeholder {
+  color: transparent;
+}
+
+.form__field:placeholder-shown ~ .form__label {
+  font-size: 16px;
+  cursor: text;
+  top: 20px;
+}
+
+label,
+.form__field:focus ~ .form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 12px;
+  color: #9b9b9b;
+}
+
+.form-control[readonly] {
+  background-color: #fbedff94 !important;
+}
+
+.form__field:focus ~ .form__label {
+  color: #26F2F1;
+}
+
+.form__field:focus {
+  padding-bottom: 6px;
+  border-bottom: 2px solid #26F2F1;
+}
+
+.touched:required:invalid, input:valid, input.visited.dirty:valid {
+  border-bottom: 2px solid #26F2F1;
+}
+.touched:required:invalid, textarea:valid, textarea.visited.dirty:valid {
+  border-bottom: 2px solid #26F2F1;
+}
+
+.touched:required:invalid {
+  border-bottom: 1px solid red;
+}
+
+form.submitted input:invalid {
+  border-bottom: 1px solid red;
+}
+
+form.submitted textarea:invalid {
+  border-bottom: 1px solid red;
+}
+
+.date {
+  width: 300px;
+}
+ 
+.form-group label {
+  position: initial;
+  text-align: left;
+}
+
+.form-group {
+  margin-bottom: 0 !important;
+}
+
+.warning {
+  color: red;
+  font-size: 12px;
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  padding-top: 20px;
+  left: 0;
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+.rel {
+  position: relative !important;
+  font-size: 14px !important;
+}
+

@@ -4,14 +4,17 @@ const bodyParser = require("body-parser");
 const Cors = require("cors");
 const basicAuth = require("express-basic-auth");
 const session = require('express-session');
+const swig = require('swig');
+const moment = require('moment');
 
 const app = express();
 
-// session for basic logout
+// session for basic auth
 app.use(session({ 
   secret: 'Idea is Idealump',
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  //cookie: { maxAge: 6000 }
 }));
 
 app.use(function (req, res, next) {
@@ -32,7 +35,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-// basic authentication
+//basic authentication
 app.use(basicAuth({
   challenge: true,
   users: { 'idealump': 'idealump' },
@@ -46,13 +49,90 @@ app.use(bodyParser.json());
 // parse requests of content-type: application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Swig Template
+app.engine('html', swig.renderFile);
+app.set('view engine', 'html');
+app.set('views', __dirname + '/views');
+
 // routing
+app.get('/', function(req, res) {
+  let message = '';
+
+  if (req.session.loggedin) {
+    res.render('home', {
+      username: req.session.username,
+    });
+  } else {
+    if(req.session.error) {
+      message = req.session.error;
+    }
+    res.render('login', {message: message});
+  }
+});
+
+app.get('/editnews/:id', function(req, res) {
+  let message = '';
+  let news = req.session.newsOne
+  let page = 'edit';
+ 
+  if (req.session.loggedin) {
+    if(req.session.error) {
+      message = req.session.error;
+    }
+    res.render('home', {
+      username: req.session.username,
+      page: page,
+      news: news, 
+      message: message, 
+      today: moment().format('YYYY-MM-DD hh:mm:ss')
+    });
+  } else {
+    if(req.session.error) {
+      message = req.session.error;
+    }
+    res.render('login', {message: message});
+  }
+});
+
+app.get('/addnews', function(req, res) {
+  let message = '', newNewsId = '';
+  let page = 'add';
+
+  if (req.session.newNewsId) { 
+    newNewsId = req.session.newNewsId
+  }
+    
+  if (req.session.loggedin) {
+    if(req.session.error) {
+      message = req.session.error;
+    }
+    res.render('home', {
+      username: req.session.username,
+      newNewsId: newNewsId, 
+      page: page,
+      message: message, 
+      today: moment().format('YYYY-MM-DD hh:mm:ss')
+    });
+  } else {
+    if(req.session.error) {
+      message = req.session.error;
+    }
+    res.render('login', {message: message});
+  }
+});
+
 require("./routes/users.route.js")(app);
 require("./routes/news.route.js")(app);
+app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/views'));
 
 app.get("/logout", function (req, res) {
   delete req.session.authStatus;
-  res.send('You are now logged out.');
+  delete req.session.loggedin;
+  delete req.session.username;
+  delete req.session.newNewsId;
+
+  res.render('login');
 });
 
 // catch 404 and forward to error handler

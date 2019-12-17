@@ -6,7 +6,7 @@ const News = function(news) {
   this.news_content = news.news_content;
   this.date_from = news.date_from;
   this.date_to = news.date_to;
-  this.status = news.status
+  this.status = news.status;
 };
 
 // Create a new News
@@ -18,7 +18,6 @@ News.create = (newNews, result) => {
       return;
     }
 
-    console.log("created news: ", { id: res.insertId, ...newNews });
     result(null, { id: res.insertId, ...newNews });
   });
 };
@@ -33,7 +32,6 @@ News.findById = (id, result) => {
     }
 
     if (res.length) {
-      console.log("found news: ", res[0]);
       result(null, res[0]);
       return;
     }
@@ -44,10 +42,29 @@ News.findById = (id, result) => {
 };
 
 // Retrieve all News
-News.getAll = (page, limit, result)=> {
+News.getAll = (page, limit, search, result)=> {
+ 
+  // Check if there's query for pagination
+  if(page == undefined || limit == undefined){
+    page = '0';
+    limit = '20'
+  }
   page = parseInt(page);
   limit = parseInt(limit);
-  
+
+  let total, newsList;
+
+  // Count total data in news table
+  sql.query("SELECT count(*) AS total FROM news",
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+      total = res;
+  });
+
   sql.query("SELECT * FROM news ORDER BY id DESC limit ? OFFSET ?",
   [limit, page],
   (err, res) => {
@@ -56,10 +73,45 @@ News.getAll = (page, limit, result)=> {
       result(null, err);
       return;
     }
+    
+    // If search something
+    if (!!search) {
+      sql.query([
+        'SELECT *, count(*) OVER() as total FROM news',
+        ' WHERE id LIKE "%'+search+'%"',
+        ' OR date_from LIKE "%'+search+'%"',
+        ' OR date_to LIKE "%'+search+'%"',
+        ' OR news_content LIKE "%'+search+'%"',
+        ' OR status LIKE "%'+search+'%" ORDER BY id DESC'
+        ].join(''),
+      (err, ressearch) => {
+        if (err) {
+          console.log("error: ", err);
+          result(null, err);
+          return;
+        }
 
-    console.log("news: ", res);
-    result(null, res);
+        let totalSearch = 0
+        if(ressearch.length !== 0){
+          totalSearch = ressearch[0].total
+        }
+        
+        newsList = {
+          total : totalSearch,
+          rows : ressearch
+        }
+
+        result(null, newsList);
+      });
+    } else {
+      newsList = {
+        total : total[0].total,
+        rows : res
+      }
+      result(null, newsList);
+    }
   });
+  return;
 };
 
 // Update a News with id
@@ -80,7 +132,6 @@ News.updateById = (id, news, result) => {
         return;
       }
 
-      console.log("updated news: ", { id: id, ...news });
       result(null, { id: id, ...news });
     }
   );
@@ -101,7 +152,6 @@ News.remove = (id, result) => {
       return;
     }
 
-    console.log("deleted news with id: ", id);
     result(null, res);
   });
 };
