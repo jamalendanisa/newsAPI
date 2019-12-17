@@ -9,7 +9,7 @@ const mysql = require("mysql");
 //   database: dbConfig.DB
 // }); 
 
-Create a connection to the database
+// Create a connection to the database
 const connection = mysql.createConnection({
   host     : process.env.MYSQL_ADDON_HOST,
   database : process.env.MYSQL_ADDON_DB,
