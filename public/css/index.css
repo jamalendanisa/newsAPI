@@ -12,10 +12,15 @@ body {
 /* Page */
 #loader {
   z-index: 100;
-  position: fixed;
   width: 100%;
-  padding: 15% 41%;
+  background: #ffffffbd;
+  padding: 200px 0;
   height: 100%;
+  left: 50%;
+  position: fixed;
+  top: 49%;
+  text-align: center;
+  transform: translate(-50%, -50%);
 }
 .menu-title {
   font-size: 22px;
