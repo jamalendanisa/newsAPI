@@ -32,7 +32,7 @@ Login with data :
 
 ### DELETE NEWS
 ```
-DELETE NEWS https://idealump-news.cleverapps.io/delete/news/:id
+ https://idealump-news.cleverapps.io/delete/news/:id
 ```
 
 
