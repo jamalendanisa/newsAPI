@@ -11,19 +11,11 @@ const mysql = require("mysql");
 
 // Create a connection to the database
 const connection = mysql.createConnection({
-  host: dbConfig.HOST,
-  user: dbConfig.USER,
-  password: dbConfig.PASSWORD,
-  database: dbConfig.DB
-}); 
-
-// Create a connection to the database
-// const connection = mysql.createConnection({
-//   host     : process.env.MYSQL_ADDON_HOST,
-//   database : process.env.MYSQL_ADDON_DB,
-//   user     : process.env.MYSQL_ADDON_USER,
-//   password : process.env.MYSQL_ADDON_PASSWORD
-// });
+  host     : process.env.MYSQL_ADDON_HOST,
+  database : process.env.MYSQL_ADDON_DB,
+  user     : process.env.MYSQL_ADDON_USER,
+  password : process.env.MYSQL_ADDON_PASSWORD
+});
 
 // open the MySQL connection and create database and table if doesn't exist
 connection.connect(error => {
