@@ -6,6 +6,8 @@ const basicAuth = require("express-basic-auth");
 const session = require('express-session');
 const swig = require('swig');
 const moment = require('moment');
+const axios = require('axios');
+const config = require('./config/weather.config.js');
 
 const app = express();
 
@@ -43,7 +45,9 @@ app.use(basicAuth({
 }));
 
 // CORS Handle
-app.use(Cors());
+app.use(Cors({ origin: true }));
+app.options('*', Cors());
+
 // parse requests of content-type: application/json
 app.use(bodyParser.json());
 // parse requests of content-type: application/x-www-form-urlencoded
@@ -119,6 +123,20 @@ app.get('/addnews', function(req, res) {
     }
     res.render('login', {message: message});
   }
+});
+
+// Get data from the Dark Sky API.
+app.get('/weather', function(req, res) {
+  let requestUrl = config.URL + '/' + config.API_KEY + '/' +
+      config.LAT + ',' + config.LANG + config.QUERY;
+
+  axios.get(requestUrl)
+    .then(function(data) {
+      res.status(200).json(data.data);
+    })
+    .catch(function(error) {
+      console.log(error);
+  });
 });
 
 require("./routes/users.route.js")(app);
