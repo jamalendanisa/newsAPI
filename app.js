@@ -50,14 +50,8 @@ app.use(basicAuth({
 //     methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
 //     allowedHeaders: ['Content-Type', 'Authorization']
 // };
-// app.use(Cors(corsOpt));
-// app.options('*', Cors(corsOpt));
-
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+app.use(Cors());
+app.options('*', Cors());
 
 // parse requests of content-type: application/json
 app.use(bodyParser.json());
@@ -137,7 +131,7 @@ app.get('/addnews', function(req, res) {
 });
 
 // Get data from the Dark Sky API.
-app.get('/weather', function(req, res) {
+app.get('/weather',  Cors(),  function(req, res) {
   let requestUrl = config.URL + '/' + config.API_KEY + '/' +
       config.LAT + ',' + config.LANG + config.QUERY;
 
