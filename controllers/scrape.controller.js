@@ -3,7 +3,7 @@ const { Cluster } = require('puppeteer-cluster');
 const cheerio = require('cheerio');
 const url = "http://www.lumine.ne.jp/ikebukuro/news/";
 
-require('events').EventEmitter.defaultMaxListeners = 20;
+require('events').EventEmitter.prototype._maxListeners = 100;
 
 const args = [
   '--no-sandbox',
@@ -21,7 +21,7 @@ exports.data = (req, res) => {
     const cluster = await Cluster.launch({
       concurrency: Cluster.CONCURRENCY_CONTEXT,
       timeout: 500000,
-      maxConcurrency: 9, 
+      maxConcurrency: 30, 
     });
   
     await cluster.task(async ({ page, data: url }) => {
