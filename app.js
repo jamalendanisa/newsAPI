@@ -45,8 +45,13 @@ app.use(basicAuth({
 }));
 
 // CORS Handle
-app.use(Cors({ origin: true }));
-app.options('*', Cors());
+const corsOpt = {
+    origin: process.env.CORS_ALLOW_ORIGIN || '*',
+    methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+};
+app.use(cors(corsOpt));
+app.options('*', cors(corsOpt));
 
 // parse requests of content-type: application/json
 app.use(bodyParser.json());
