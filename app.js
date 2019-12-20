@@ -50,8 +50,8 @@ const corsOpt = {
     methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
 };
-app.use(cors(corsOpt));
-app.options('*', cors(corsOpt));
+app.use(Cors(corsOpt));
+app.options('*', Cors(corsOpt));
 
 // parse requests of content-type: application/json
 app.use(bodyParser.json());
