@@ -55,7 +55,7 @@ app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 
 // routing
-app.get('/', function(req, res) {
+app.get('/cms', function(req, res) {
   let message = '';
 
   if (req.session.loggedin) {
@@ -123,6 +123,7 @@ app.get('/addnews', function(req, res) {
 
 require("./routes/users.route.js")(app);
 require("./routes/news.route.js")(app);
+require("./routes/scrape.route.js")(app);
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/views'));
 

@@ -28,7 +28,7 @@
 	  <header class="home-topbar">
 		<nav class="home-navbar">
 		  <div class="home-navbar-header">
-			<a class="logo" href="/">
+			<a class="logo" href="/cms">
 			  <img alt="logo" src="/images/logo-idealump.svg" />
 			</a>
 		  </div>
@@ -41,8 +41,8 @@
 	  <aside class="home-left-sidebar">
 		<nav class="sidebar-nav">
 		  <ul id="sidebarnav">
-			<li onclick="window.location.href = '/'" id="news-list" class="ripple">
-			  <a href="/" ><i class="far fa-list-alt"></i>News List</a>
+			<li onclick="window.location.href = '/cms'" id="news-list" class="ripple">
+			  <a href="/cms" ><i class="far fa-list-alt"></i>News List</a>
 			</li>
 			<li onclick="window.location.href = '/addnews';" id="add-news" class="ripple">
 			  <a href="/addnews"><i class="far fa-newspaper"></i>News Add</a>
@@ -120,7 +120,7 @@
                   </div>
 				  <button id="addNewsButton" onclick="return confirm('Are you sure?')" class="addnews-button ripple" type="submit" disabled>{% if page == 'edit' %}EDIT{% else %}ADD{% endif %} </button>
 				  {% if page == 'edit' %}
-					<button id="cancel" onclick="window.location.href = '/'" class="addnews-button ripple">CANCEL</button>
+					<button id="cancel" onclick="window.location.href = '/cms'" class="addnews-button ripple">CANCEL</button>
 				  {% endif %}
                 </form>
               </div>

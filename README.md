@@ -6,7 +6,7 @@
 
 ### Login User
 ```
- https://idealump-news.cleverapps.io/
+ https://idealump-news.cleverapps.io/cms
 ```
 Login with data :
 ```
@@ -17,7 +17,7 @@ Login with data :
 
 ### NEWS LIST
 ```
- https://idealump-news.cleverapps.io/
+ https://idealump-news.cleverapps.io/cms
 ```
 
 ### ADD NEWS
@@ -109,6 +109,14 @@ With data :
 ```
 GET https://idealump-news.cleverapps.io/delete/news/:id
 ```
+
+
+### Data scraping
+```
+GET https://idealump-news.cleverapps.io/scrapedata
+```
+
+
 
 ***The database's environment is for deployment on the cloud purpose. 
 If you want to install it locally, please kindly set the database env to yours.***

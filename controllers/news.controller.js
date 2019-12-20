@@ -105,7 +105,7 @@ exports.update = (req, res) => {
         }
       } else { 
           delete req.session.error;
-          res.redirect('/'); 
+          res.redirect('/cms'); 
       }
     }
   );

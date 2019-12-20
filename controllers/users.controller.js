@@ -6,20 +6,20 @@ exports.access = (req, res) => {
     if (err) {
       if (err.kind === "not_found") {
         req.session.error = 'User not found';
-        res.redirect('/');
+        res.redirect('/cms');
       } else {
         req.session.error = 'Error retrieving User. Please try again.';
-        res.redirect('/');
+        res.redirect('/cms');
       }
     } else {
       if (data.password !== Buffer.from(req.body.password).toString('base64')) {  
         req.session.error = 'Wrong password';
-        res.redirect('/');
+        res.redirect('/cms');
       } else {
         delete req.session.error;
         req.session.loggedin = true;
         req.session.username = data.username;
-				res.redirect('/');
+				res.redirect('/cms');
       }
     }
   });

@@ -5,6 +5,16 @@ $(document).ready( function() {
  
   // Paging settings
   if (window.location.pathname == "/addnews" || window.location.pathname.includes("/editnews")){
+    // Paging
+    $("#add-news").addClass("active-menu");
+    $("#news-list-content").addClass("hide");
+    $("#add-news-content").addClass("show");
+    $("#news-list-content").addClass("hide");
+    $("#add-news-content").removeClass("hide");
+    $("#news-list-content").removeClass("show");
+    $("#news-list").removeClass("active-menu");
+    $(this).addClass("active-menu"); 
+    
     if(window.location.pathname == "/addnews" ) {
       // Get new News Id
       axios.get("http://localhost:9000/news?limit=1&page=0", {
@@ -18,16 +28,6 @@ $(document).ready( function() {
           console.log(error);
       });
     }
-
-    // Paging
-    $("#add-news").addClass("active-menu");
-    $("#news-list-content").addClass("hide");
-    $("#add-news-content").addClass("show");
-    $("#news-list-content").addClass("hide");
-    $("#add-news-content").removeClass("hide");
-    $("#news-list-content").removeClass("show");
-    $("#news-list").removeClass("active-menu");
-    $(this).addClass("active-menu"); 
   }else {
     // Paging
     $("#news-list-content").addClass("show");
@@ -117,7 +117,7 @@ $(document).ready( function() {
             password: 'idealump'
           }
         }).then(function(response) {
-            window.location.href = "/"
+            window.location.href = "/cms"
         }).catch(function(error) {
             console.log(error);
         });

@@ -1,5 +1,5 @@
 {
-  "name": "NewsCMS",
+  "name": "newscms",
   "description": "CMS for News List",
   "version": "1.0.0",
   "private": true,
@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
+    "cheerio": "^1.0.0-rc.3",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "express": "~4.16.1",
@@ -18,6 +19,8 @@
     "http-errors": "^1.6.3",
     "moment": "^2.24.0",
     "mysql": "^2.17.1",
+    "puppeteer": "^2.0.0",
+    "puppeteer-cluster": "^0.18.0",
     "swig": "^1.4.2"
   }
 }
