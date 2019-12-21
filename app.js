@@ -1,7 +1,7 @@
 const createError = require('http-errors');
 const express = require('express');
 const bodyParser = require("body-parser");
-const Cors = require("cors");
+const cors = require("cors");
 const basicAuth = require("express-basic-auth");
 const session = require('express-session');
 const swig = require('swig');
@@ -52,8 +52,8 @@ const corsOpt = {
    credentials: true, 
    preflightContinue: false
 };
-app.use(Cors(corsOpt));
-app.options('*', Cors(corsOpt));
+app.use(cors(corsOpt));
+app.options('*', cors(corsOpt));
 
 // parse requests of content-type: application/json
 app.use(bodyParser.json());
@@ -133,7 +133,7 @@ app.get('/addnews', function(req, res) {
 });
 
 // Get data from the Dark Sky API.
-app.get('/weather', Cors({credentials: true, origin: 'http://localhost:3000'}), isAutenticated(), function(req, res) {
+app.get('/weather', cors({credentials: true, origin: 'http://localhost:3000'}), isAutenticated(), function(req, res) {
   let requestUrl = config.URL + '/' + config.API_KEY + '/' +
       config.LAT + ',' + config.LANG + config.QUERY;
 
