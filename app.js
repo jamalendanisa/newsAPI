@@ -46,9 +46,10 @@ app.use(basicAuth({
 
 // CORS Handle
 const corsOpt = {
-   origin: '*',
+   origin: 'http://localhost:3000',
    methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
    allowedHeaders: ['Content-Type', 'Authorization'],
+   credentials: true, 
    preflightContinue: false
 };
 app.use(Cors(corsOpt));
@@ -132,7 +133,7 @@ app.get('/addnews', function(req, res) {
 });
 
 // Get data from the Dark Sky API.
-app.get('/weather',  Cors(),  function(req, res) {
+app.get('/weather',  Cors(corsOpt),  function(req, res) {
   let requestUrl = config.URL + '/' + config.API_KEY + '/' +
       config.LAT + ',' + config.LANG + config.QUERY;
 
