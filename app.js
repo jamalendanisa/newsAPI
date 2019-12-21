@@ -46,7 +46,7 @@ app.use(basicAuth({
 
 // CORS Handle
 const corsOpt = {
-   origin: 'http://localhost:3000',
+   origin: '*',
    methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
    allowedHeaders: ['Content-Type', 'Authorization'],
    credentials: true, 
