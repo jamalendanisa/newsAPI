@@ -11,6 +11,17 @@ const config = require('./config/weather.config.js');
 
 const app = express();
 
+// CORS Handle
+const corsOpt = {
+   origin: 'http://localhost',
+   methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
+   allowedHeaders: ["Content-Type", "Authorization", "Access-Control-Allow-Methods", "Access-Control-Request-Headers"],
+   credentials: true, 
+   enablePreflight: true
+};
+app.use(cors(corsOpt));
+app.options('*', cors(corsOpt));
+
 // session for basic auth
 app.use(session({ 
   secret: 'Idea is Idealump',
@@ -43,17 +54,6 @@ app.use(basicAuth({
   users: { 'idealump': 'idealump' },
   realm: 'Secret Area',
 }));
-
-// CORS Handle
-const corsOpt = {
-   origin: 'http://localhost:3000',
-   methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
-   allowedHeaders: ['Content-Type', 'Authorization'],
-   credentials: true, 
-   preflightContinue: false
-};
-app.use(cors(corsOpt));
-app.options('*', cors(corsOpt));
 
 // parse requests of content-type: application/json
 app.use(bodyParser.json());
