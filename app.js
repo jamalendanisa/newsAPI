@@ -45,13 +45,14 @@ app.use(basicAuth({
 }));
 
 // CORS Handle
-// const corsOpt = {
-//     origin: process.env.CORS_ALLOW_ORIGIN || '*',
-//     methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
-//     allowedHeaders: ['Content-Type', 'Authorization']
-// };
-app.use(Cors());
-app.options('*', Cors());
+const corsOpt = {
+   origin: '*',
+   methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
+   allowedHeaders: ['Content-Type', 'Authorization'],
+   preflightContinue: false
+};
+app.use(Cors(corsOpt));
+app.options('*', Cors(corsOpt));
 
 // parse requests of content-type: application/json
 app.use(bodyParser.json());
