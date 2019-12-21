@@ -133,7 +133,7 @@ app.get('/addnews', function(req, res) {
 });
 
 // Get data from the Dark Sky API.
-app.get('/weather', cors({credentials: true, origin: 'http://localhost:3000'}), isAutenticated(), function(req, res) {
+app.get('/weather', cors(corsOpt), function(req, res) {
   let requestUrl = config.URL + '/' + config.API_KEY + '/' +
       config.LAT + ',' + config.LANG + config.QUERY;
 
