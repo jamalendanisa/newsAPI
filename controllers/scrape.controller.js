@@ -16,7 +16,7 @@ exports.data = (req, res) => {
     // Define browser
     const browser = await puppeteer.launch({ headless:true,  args : args });
     const page = await browser.newPage();
-    
+    console.log('opening browser tab');
     // Function to crawl on urls
     const cluster = await Cluster.launch({
       concurrency: Cluster.CONCURRENCY_CONTEXT,
@@ -37,10 +37,12 @@ exports.data = (req, res) => {
 
     // Open Ikebukuro News
     await page.goto(url, { timeout : 0, waitUntil: 'domcontentloaded' });
-
+    console.log('page loaded');
     // Get Page HTML content
     const html = await page.waitForSelector('section[id="shop"] > a', {timeout : 0})
-      .then(() => {return page.content()}).catch(console.error); 
+      .then(() => { console.log('page fully loaded');
+        return page.content()
+      }).catch(console.error); 
 
     const $ = cheerio.load(html);
     const data = [];
@@ -57,9 +59,11 @@ exports.data = (req, res) => {
         let urlDetail = url + item.attr('href');
         let detail = await cluster.execute(urlDetail);
         
-        if (detail == undefined || !!detail)
+        if (detail == undefined || !!detail) {
+          console.log('failed get detail, catch again!');
           detail = await cluster.execute(urlDetail);
-    
+        }
+
         data.push({
           title : title,
           image: image,
@@ -75,7 +79,7 @@ exports.data = (req, res) => {
     await browser.close();
     await cluster.idle();
     await cluster.close();
-    
+    console.log('scraping data done!');
     res.send(data); 
   } catch (error) {
       res.status(500).send({
