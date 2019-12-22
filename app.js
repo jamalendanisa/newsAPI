@@ -13,7 +13,7 @@ const app = express();
 
 // CORS Handle
 const corsOpt = {
-   origin: 'http://localhost',
+   origin: 'http://localhost:3000',
    methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
    allowedHeaders: ["Content-Type", "Authorization", "Access-Control-Allow-Methods", "Access-Control-Request-Headers"],
    credentials: true, 
@@ -144,6 +144,7 @@ app.get('/weather', cors(corsOpt), function(req, res) {
     .catch(function(error) {
       console.log(error);
   });
+  
 });
 
 require("./routes/users.route.js")(app);

@@ -105,13 +105,13 @@
                   </div>
                   <div class="form__group radio-form">
                     <span class="radio-label">Enable
-					  <input type="radio" id="status" name="status" value="1"
+					  <input type="radio" id="enable" name="status" value="1"
 						class="form__field radio" required onchange="checkForm()"
 						{% if news.status == 1 %}checked{% endif %}>
 					  <span class="checkmark"></span>
 					</span>
                     <span class="radio-label">Disable
-					  <input type="radio" id="status" name="status" value="0" 
+					  <input type="radio" id="disable" name="status" value="0" 
 						class="form__field radio" required onchange="checkForm()" 
 						{% if news.status == 0 %}checked{% endif %}>
 					  <span class="checkmark"></span>

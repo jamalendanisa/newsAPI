@@ -21,7 +21,7 @@ exports.data = (req, res) => {
     const cluster = await Cluster.launch({
       concurrency: Cluster.CONCURRENCY_CONTEXT,
       timeout: 500000,
-      maxConcurrency: 30, 
+      maxConcurrency: 15, 
     });
   
     await cluster.task(async ({ page, data: url }) => {

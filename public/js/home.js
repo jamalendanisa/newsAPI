@@ -17,15 +17,10 @@ $(document).ready( function() {
     
     if(window.location.pathname == "/addnews" ) {
       // Get new News Id
-      axios.get("http://localhost:9000/news?limit=1&page=0", {
-        withCredentials: true,
-        auth: {
-          username: 'idealump',
-          password: 'idealump'
-        }
-      }).then(function(response) {})
-      .catch(function(error) {
-          console.log(error);
+      $.ajax({
+        url:  "/news?limit=1&page=0"
+      }).done(function(res, err) {
+          if(err) console.log(err);
       });
     }
   }else {
@@ -95,31 +90,22 @@ $(document).ready( function() {
         
     // Show edit news page
     editNews = (id) => { 
-      axios.get("http://localhost:9000/news/"+id, {
-        withCredentials: true,
-          auth: {
-            username: 'idealump',
-            password: 'idealump'
-          }
-        }).then(function(response) {})
-        .catch(function(error) {
-          console.log(error);
-      }); 
+      $.ajax({
+        url:  "/news/"+id
+      }).done(function(res, err) {
+          if(err) console.log(err);
+      });
     };
 
     // Delete news
     deleteNews = (id) => { 
       if(confirm('Delete news?')){
-        axios.get("http://localhost:9000/delete/news/"+id, {
-          withCredentials: true,
-          auth: {
-            username: 'idealump',
-            password: 'idealump'
-          }
-        }).then(function(response) {
+        $.ajax({
+          url:  "/delete/news/"+id
+        }).done(function(res, err) {
+            if(err) console.log(err);
+
             window.location.href = "/cms"
-        }).catch(function(error) {
-            console.log(error);
         });
       }
     };
