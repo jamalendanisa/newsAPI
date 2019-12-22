@@ -7,6 +7,10 @@ const News = function(news) {
   this.date_from = news.date_from;
   this.date_to = news.date_to;
   this.status = news.status;
+  if(news.created_at)
+  this.created_at = news.created_at;
+  if(news.updated_at)
+  this.updated_at = news.updated_at;
 };
 
 // Create a new News

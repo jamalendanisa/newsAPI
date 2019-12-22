@@ -1,4 +1,5 @@
 const News = require("../models/news.model.js");
+const moment = require("moment");
 
 // Create and Save a new News
 exports.create = (req, res) => {
@@ -15,7 +16,8 @@ exports.create = (req, res) => {
     news_content : req.body.newsContent,
     date_from: req.body.dateFrom,
     date_to: req.body.dateTo,
-    status: req.body.status
+    status: req.body.status,
+    created_at: moment().format('YYYY-MM-DD hh:mm:ss')
   });
 
   // Save News in the database
@@ -80,14 +82,15 @@ exports.update = (req, res) => {
     });
   }
  
-  // Create a News
+  // Create a News Object
   let id = parseInt(req.params.id);
   const news = new News({
     id: id,
     news_content : req.body.newsContent,
     date_from: req.body.dateFrom,
     date_to: req.body.dateTo,
-    status: req.body.status
+    status: req.body.status,
+    updated_at: moment().format('YYYY-MM-DD hh:mm:ss')
   });
 
   News.updateById(

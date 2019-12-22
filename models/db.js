@@ -1,7 +1,7 @@
 const mysql = require("mysql");
 
 // Use this config env to run this application locally
-// const dbConfig = require("../config/db.config.js");
+//const dbConfig = require("../config/db.config.js");
 // const connection = mysql.createConnection({
 //   host: dbConfig.HOST,
 //   user: dbConfig.USER,
@@ -35,7 +35,9 @@ connection.connect(error => {
     news_content TEXT not null,
     date_from DATETIME not null,
     date_to DATETIME not null,
-    status TINYINT not null
+    status TINYINT not null,
+    created_at DATETIME,
+    updated_at DATETIME
   );`;
 
   let createFirstUser = `INSERT IGNORE INTO users(
