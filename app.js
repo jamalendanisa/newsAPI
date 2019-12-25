@@ -143,6 +143,11 @@ require("./routes/news.route.js")(app);
 require("./routes/scrape.route.js")(app);
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/views'));
+app.use(express.static(__dirname + '/build'));
+
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 app.get("/logout", function (req, res) {
   delete req.session.authStatus;
