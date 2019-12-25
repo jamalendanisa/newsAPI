@@ -158,7 +158,7 @@ app.get("/logout", function (req, res) {
   delete req.session.username;
   delete req.session.newNewsId;
 
-  res.render('login');
+  res.redirect('/cms');
 });
 
 // catch 404 and forward to error handler
