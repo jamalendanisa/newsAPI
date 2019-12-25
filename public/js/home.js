@@ -89,7 +89,7 @@ $(document).ready( function() {
     };
         
     // Show edit news page
-    editNews = id =>{ 
+    editNews = id => { 
       $.ajax({
         url:  "/news/"+id
       }).done(function(res, err) {
@@ -188,6 +188,15 @@ $(document).ready( function() {
   });
 
   // Date To validation
+  $('#date-from').on('dp.change', function(e){ 
+    if(document.getElementById("dateFrom").value > document.getElementById("dateTo").value){
+      alert("Date 'PUBLISH TO' should be greater than date 'PUBLISH FROM'!");
+      document.getElementById("addNewsButton").disabled = true;
+    }else{
+      document.getElementById("addNewsButton").disabled = false;
+    }
+  });
+
   $('#date-to').on('dp.change', function(e){ 
     if(document.getElementById("dateFrom").value > document.getElementById("dateTo").value){
       alert("Date 'PUBLISH TO' should be greater than date 'PUBLISH FROM'!");
