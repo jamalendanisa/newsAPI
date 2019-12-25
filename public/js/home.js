@@ -1,7 +1,7 @@
 $(document).ready( function() {	
   
   // Fading out loader
-  $('#loader').fadeOut();
+    $('#loader').fadeOut();
  
   // Paging settings
   if (window.location.pathname == "/addnews" || window.location.pathname.includes("/editnews")){
@@ -89,22 +89,22 @@ $(document).ready( function() {
     };
         
     // Show edit news page
-    editNews = (id) => { 
+    editNews = id =>{ 
       $.ajax({
         url:  "/news/"+id
       }).done(function(res, err) {
           if(err) console.log(err);
+          window.location.href = "/editnews/"+id
       });
     };
 
     // Delete news
-    deleteNews = (id) => { 
+    deleteNews = id => { 
       if(confirm('Delete news?')){
         $.ajax({
           url:  "/delete/news/"+id
         }).done(function(res, err) {
-            if(err) console.log(err);
-
+            if(err) console.log(err)
             window.location.href = "/cms"
         });
       }
@@ -113,7 +113,7 @@ $(document).ready( function() {
     // Action column costum render
     function operateFormatter (value, row, index) {
       return [
-        '<a onclick="editNews('+value+')" class="edit" href="/editnews/'+value+'" title="Edit News">',
+        '<a onclick="editNews('+value+')" class="edit" title="Edit News">',
         '<i class="far fa-edit"></i>',
         '</a>  ',
         '<a onclick="deleteNews('+value+')" class="remove" title="Remove">',

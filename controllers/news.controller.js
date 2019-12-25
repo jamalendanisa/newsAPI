@@ -68,7 +68,7 @@ exports.findOne = (req, res) => {
       }
     } else { 
       req.session.newsOne = data
-      res.send(data); 
+      res.send(data);
     }
   });
 };

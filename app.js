@@ -40,13 +40,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-//basic authentication
-app.use(basicAuth({
-  challenge: true,
-  users: { 'idealump': 'idealump' },
-  realm: 'Secret Area',
-}));
-
 // parse requests of content-type: application/json
 app.use(bodyParser.json());
 // parse requests of content-type: application/x-www-form-urlencoded
@@ -57,13 +50,27 @@ app.engine('html', swig.renderFile);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 
-// routing
+// routing client
+app.use(express.static(__dirname + '/build'));
+
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
+//basic authentication
+app.use(basicAuth({
+  challenge: true,
+  users: { 'idealump': 'idealump' },
+  realm: 'Secret Area',
+}));
+
+// routing cms
 app.get('/cms', function(req, res) {
   let message = '';
 
   if (req.session.loggedin) {
     res.render('home', {
-      username: req.session.username,
+      username: req.session.username
     });
   } else {
     if(req.session.error) {
@@ -143,11 +150,7 @@ require("./routes/news.route.js")(app);
 require("./routes/scrape.route.js")(app);
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/views'));
-app.use(express.static(__dirname + '/build'));
 
-app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
 
 app.get("/logout", function (req, res) {
   delete req.session.authStatus;

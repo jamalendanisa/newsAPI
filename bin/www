@@ -72,16 +72,10 @@ server.on('error', onError);
 server.on('listening', function () {
   onListening
 
-  // This function below is for call scrape data function right after app start
-  // And calling it every 30 minutes
-  // I'll write this just in case for adding posibility, will comment it for now
-  // You could call the function when go to /scrapedata
-
-  // call scraping data function to work
- // scrape.data();
- // console.log('start scraping data')
- // cron.schedule('*/30 * * * *', () => {
- //   console.log('running scrape data task every 30 minutes');
-  // scrape.data();
- // });
+  // call scraping data and run it everyday at 12 AM
+ console.log('start scraping data')
+ cron.schedule('0 0 0 * * *', () => {
+   console.log('running scrape data task every 30 minutes');
+  scrape.data();
+ });
 });

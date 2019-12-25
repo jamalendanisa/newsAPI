@@ -8,9 +8,9 @@ const News = function(news) {
   this.date_to = news.date_to;
   this.status = news.status;
   if(news.created_at)
-  this.created_at = news.created_at;
+    this.created_at = news.created_at;
   if(news.updated_at)
-  this.updated_at = news.updated_at;
+    this.updated_at = news.updated_at;
 };
 
 // Create a new News
@@ -108,9 +108,17 @@ News.getAll = (page, limit, search, result)=> {
         result(null, newsList);
       });
     } else {
-      newsList = {
-        total : total[0].total,
-        rows : res
+      if (total){
+        newsList = {
+          total : total[0].total,
+          rows : res
+        }
+        
+      } else {
+        newsList = {
+          total : 0,
+          rows : res
+        }
       }
       result(null, newsList);
     }
