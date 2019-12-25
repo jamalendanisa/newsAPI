@@ -1,7 +1,7 @@
 const mysql = require("mysql");
 
 // Use this config env to run this application locally
-//const dbConfig = require("../config/db.config.js");
+// const dbConfig = require("../config/db.config.js");
 // const connection = mysql.createConnection({
 //   host: dbConfig.HOST,
 //   user: dbConfig.USER,
@@ -20,8 +20,6 @@ const connection = mysql.createConnection({
 // open the MySQL connection and create database and table if doesn't exist
 connection.connect(error => {
   if (error) throw error;
-
-  let query;
 
   let createTableUser = `CREATE TABLE IF NOT EXISTS users(
     id INT primary key AUTO_INCREMENT,
@@ -44,6 +42,8 @@ connection.connect(error => {
     id, username, email, password) VALUES (
     1, 'idealump', 'idea@idealump.com', '${Buffer.from("idealump").toString('base64')}');`;
 
+  let createScrapeData = `CREATE TABLE IF NOT EXISTS scrape_data(id INT primary key, data LONGTEXT);`
+
   connection.query(createTableNews, function(err, results, fields) {
     if (error) throw error;
   });
@@ -53,6 +53,10 @@ connection.connect(error => {
   });
 
   connection.query(createFirstUser, function(err, results, fields) {
+    if (error) throw error;
+  });
+
+  connection.query(createScrapeData, function(err, results, fields) {
     if (error) throw error;
   });
 });

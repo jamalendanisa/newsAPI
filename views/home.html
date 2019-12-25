@@ -2,6 +2,7 @@
 <html>
   <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Idealump News CMS</title>
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -117,11 +118,13 @@
 					  <span class="checkmark"></span>
 					</span>
                     <label for="id" class="form__label">STATUS</label>
-                  </div>
-				  <button id="addNewsButton" onclick="return confirm('Are you sure?')" class="addnews-button ripple" type="submit" disabled>{% if page == 'edit' %}EDIT{% else %}ADD{% endif %} </button>
-				  {% if page == 'edit' %}
-					<button id="cancel" onclick="window.location.href = '/cms'" class="addnews-button ripple">CANCEL</button>
-				  {% endif %}
+				  </div>
+				  <div class="button-container">
+					<button id="addNewsButton" onclick="return confirm('Are you sure?')" class="addnews-button ripple" type="submit" disabled>{% if page == 'edit' %}EDIT{% else %}ADD{% endif %} </button>
+					{% if page == 'edit' %}
+						<button id="cancel" onclick="window.location.href = '/cms'" class="addnews-button ripple">CANCEL</button>
+					{% endif %}
+				</div>
                 </form>
               </div>
 			</div>

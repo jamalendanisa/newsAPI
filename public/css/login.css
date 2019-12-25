@@ -99,3 +99,39 @@ button:disabled {
   background-color: #622AFD;
   background-size: 100%;
 }
+
+@media only screen and (max-width: 500px) {
+  .login-box {
+    width: 65%;
+    height: 50%;
+  }
+
+  .round1 {
+    right: -18%;
+    width: 35%;
+    height: 23%;
+  }
+
+  .round2 {
+    left: -18%;
+    width: 35%;
+    height: 23%;
+  }
+
+  .login-title {
+    font-size: 7vw;
+  }
+
+  .login-subtitle {
+    font-size: 3vw;
+  }
+
+  .forgot-pass {
+    font-size: 3vw;
+    padding: 1vw 0;
+  }
+
+  .login-button {
+    font-size: 4vw;
+  }
+}

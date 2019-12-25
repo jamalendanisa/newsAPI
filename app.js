@@ -12,15 +12,7 @@ const config = require('./config/weather.config.js');
 const app = express();
 
 // CORS Handle
-const corsOpt = {
-   origin: 'http://localhost:3000',
-   methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
-   allowedHeaders: ["Content-Type", "Authorization", "Access-Control-Allow-Methods", "Access-Control-Request-Headers"],
-   credentials: true, 
-   enablePreflight: true
-};
-app.use(cors(corsOpt));
-app.options('*', cors(corsOpt));
+app.use(cors());
 
 // session for basic auth
 app.use(session({ 
@@ -133,7 +125,7 @@ app.get('/addnews', function(req, res) {
 });
 
 // Get data from the Dark Sky API.
-app.get('/weather', cors(corsOpt), function(req, res) {
+app.get('/weather', function(req, res) {
   let requestUrl = config.URL + '/' + config.API_KEY + '/' +
       config.LAT + ',' + config.LANG + config.QUERY;
 
@@ -144,7 +136,6 @@ app.get('/weather', cors(corsOpt), function(req, res) {
     .catch(function(error) {
       console.log(error);
   });
-  
 });
 
 require("./routes/users.route.js")(app);

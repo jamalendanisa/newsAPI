@@ -4,6 +4,8 @@
 const app = require('../app');
 const debug = require('debug')('api:server');
 const http = require('http');
+const scrape = require("../controllers/scrape.controller.js");
+const cron = require('node-cron');
 
 // Normalize a port into a number, string, or false.
 normalizePort = val => {
@@ -67,4 +69,19 @@ onListening = () => {
 }
 
 server.on('error', onError);
-server.on('listening', onListening);
+server.on('listening', function () {
+  onListening
+
+  // This function below is for call scrape data function right after app start
+  // And calling it every 30 minutes
+  // I'll write this just in case for adding posibility, will comment it for now
+  // You could call the function when go to /scrapedata
+
+  // call scraping data function to work
+ // scrape.data();
+ // console.log('start scraping data')
+ // cron.schedule('*/30 * * * *', () => {
+ //   console.log('running scrape data task every 30 minutes');
+  // scrape.data();
+ // });
+});

@@ -1,22 +1,33 @@
 const puppeteer = require('puppeteer');
 const { Cluster } = require('puppeteer-cluster');
 const cheerio = require('cheerio');
+const cron = require('node-cron');
 const url = "http://www.lumine.ne.jp/ikebukuro/news/";
+const sql = require("../models/db.js");
 
 require('events').EventEmitter.prototype._maxListeners = 100;
 
 const args = [
   '--no-sandbox',
+  "--proxy-server='direct://'",
+  "--proxy-bypass-list=*"
 ]
 
 // Scraping Data from lumine.ne.jp
 exports.data = (req, res) => {
+  console.log('function has been summoned');
   (async () => {
   try {
     // Define browser
-    const browser = await puppeteer.launch({ headless:true,  args : args });
+    const timeout = 300000
+    const browser = await puppeteer.launch({ headless:true,  args : args, timeout });
+    cron.schedule('*/30 * * * *', async () => {
+      console.log('time out 30 minutes');
+      await browser.close();
+    });
     const page = await browser.newPage();
     console.log('opening browser tab');
+
     // Function to crawl on urls
     const cluster = await Cluster.launch({
       concurrency: Cluster.CONCURRENCY_CONTEXT,
@@ -26,6 +37,7 @@ exports.data = (req, res) => {
   
     await cluster.task(async ({ page, data: url }) => {
       await page.goto(url,  { timeout : 0, waitUntil: 'domcontentloaded' });
+      console.log('detail page loaded')
       const content = await page.$eval('.newsTxt', newsText => newsText.innerText.trim());
       return content;
     });
@@ -38,11 +50,15 @@ exports.data = (req, res) => {
     // Open Ikebukuro News
     await page.goto(url, { timeout : 0, waitUntil: 'domcontentloaded' });
     console.log('page loaded');
+
     // Get Page HTML content
     const html = await page.waitForSelector('section[id="shop"] > a', {timeout : 0})
       .then(() => { console.log('page fully loaded');
         return page.content()
-      }).catch(console.error); 
+      }).catch(async()=>{
+        await browser.close();
+        console.erorr
+      }); 
 
     const $ = cheerio.load(html);
     const data = [];
@@ -51,15 +67,15 @@ exports.data = (req, res) => {
     $('section[id="shop"] > a').each(async function () {      
       try {  
         let item = $(this);
-
+        console.log('Get data items');
         // Get all data items
         let image = 'http://www.lumine.ne.jp' + item.find(".topicsImg > img").attr('src');
         let title = item.find('.topicsInfo').children()[0].next.data.trim();
         let date = item.find('.date').text(); 
         let urlDetail = url + item.attr('href');
         let detail = await cluster.execute(urlDetail);
-        
-        if (detail == undefined || !!detail) {
+       
+        if (detail == undefined) {
           console.log('failed get detail, catch again!');
           detail = await cluster.execute(urlDetail);
         }
@@ -70,8 +86,9 @@ exports.data = (req, res) => {
           detail: detail,
           date : date
         });
-
+         
       } catch (error) {
+        console.log('scraping data failed, catch again!');
         console.log(error); 
       }
     });
@@ -79,13 +96,55 @@ exports.data = (req, res) => {
     await browser.close();
     await cluster.idle();
     await cluster.close();
-    console.log('scraping data done!');
-    res.send(data); 
+    console.log('scraping data done!', data);
+   
+    let scrapedData = { id: 1, data: JSON.stringify(data)};
+
+    sql.query(`SELECT * FROM scrape_data WHERE id = 1`, (err, response) => {
+      if (err) {
+        console.log("error: ", err);
+        return;
+      }
+
+      if (response.length) {
+        sql.query("UPDATE scrape_data SET ? WHERE id = 1",
+          [scrapedData],
+          (err, response) => {
+            if (err) {
+              console.log("error: ", err);
+              return;
+            }
+
+            res.send('scraping data updated!');
+            console.log('scraping data updated!');
+        });
+        return;
+      }
+    
+    sql.query("INSERT INTO scrape_data SET ?", scrapedData, (err, response) => {
+      if (err) {
+        console.log("error: ", err);
+        return;    
+      }
+
+      res.send('scraping data saved!');
+      console.log('scraping data saved!');
+    });
+ });
   } catch (error) {
-      res.status(500).send({
-        message:
-          error.message || "Some error occurred while retrieving data."
-      });
+    //  this.data();
+      console.log('scraping data failed, catch again!', error);
     }
   })();
+};
+
+exports.scraped  = (req, res) => {
+  sql.query(`SELECT * FROM scrape_data`, (err, data) => {
+    if (err)
+      res.send({
+        message:
+          err.message || "Some error occurred while retrieving data."
+      });
+    else res.send(data);
+  });
 };

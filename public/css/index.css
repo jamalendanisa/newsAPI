@@ -168,3 +168,27 @@ form.submitted textarea:invalid {
   position: relative !important;
   font-size: 14px !important;
 }
+
+@media only screen and (max-width: 500px) {
+  .warning {
+    font-size: 3vw;
+  }
+
+  .form__group {
+    padding: 4vw 0 0;
+  }
+
+  .form__field {
+    font-size: 4vw;
+    padding: 1vw;
+  }
+
+  label {
+    font-size: 3vw;
+  }
+
+  .menu-title {
+    font-size: 5vw;
+  }
+}
+

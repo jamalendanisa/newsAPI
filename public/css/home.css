@@ -132,6 +132,10 @@ a {
 
 /* Form */
 
+.button-container {
+  display: flex;
+}
+
 .addnews-button {
   color: white;
   padding: 10px;
@@ -139,7 +143,7 @@ a {
   border: none;
   width: 20%;
   font-weight: 500;
-  margin: 40px 0 0;
+  margin: 40px 40px 0 0;
   border-radius: 6px;
   cursor: pointer !important;
 }
@@ -254,4 +258,68 @@ button:disabled {
 
 .float-right {
   float: right;
+}
+
+@media only screen and (max-width: 500px) {
+  .home-topbar {
+    margin-top: -25%;
+  }
+
+  .home-navbar-header {
+    width: 25% !important;
+  }
+
+  .home-navbar-profile {
+    padding-right: 2px;
+  }
+
+  .home-left-sidebar {
+    width: 100%;
+  }
+
+  .logo img {
+    width: 90%;
+    padding-top: 20px;
+  }
+
+  .username {
+    font-size: 4vw;
+  }
+
+  ul {
+    display: flex;
+    margin-top: 0;
+  }
+
+  li {
+    padding: 20px 15px;
+  }
+
+  .page-wrapper {
+    margin-left: 10px;
+    margin-top: 25%;
+  }
+
+  .page-container {
+    padding-top: 13%;
+  }
+
+  .content-container {
+    min-width: 0;
+  }
+
+  .date {
+    width: auto;
+  }
+
+  .addnews-button {
+    width: 50%;
+    margin-right: 10px;
+  }
+}
+
+@media only screen and (max-width: 320px){
+  .page-container {
+      padding-top: 30%;
+  }
 }
