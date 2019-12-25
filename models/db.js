@@ -10,7 +10,7 @@ const mysql = require("mysql");
 // }); 
 
 // Create a connection to the database
-const connection = mysql.createConnection({
+const connection = mysql.createPool({
   host     : process.env.MYSQL_ADDON_HOST,
   database : process.env.MYSQL_ADDON_DB,
   user     : process.env.MYSQL_ADDON_USER,
@@ -18,7 +18,7 @@ const connection = mysql.createConnection({
 });
 
 // open the MySQL connection and create database and table if doesn't exist
-connection.connect(error => {
+connection.getConnection(function(err, connection) {
   if (error) throw error;
 
   let createTableUser = `CREATE TABLE IF NOT EXISTS users(
@@ -59,6 +59,8 @@ connection.connect(error => {
   connection.query(createScrapeData, function(err, results, fields) {
     if (error) throw error;
   });
+
+  connection.release();
 });
 
 module.exports = connection;
