@@ -324,7 +324,6 @@ button:disabled {
     margin-left: 0;
     margin-top: 50px;
     width: 100%;
-    pointer-events: none;
   }
 
   .page-container {
