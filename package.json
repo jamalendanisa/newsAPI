@@ -24,5 +24,11 @@
     "puppeteer": "^2.0.0",
     "puppeteer-cluster": "^0.18.0",
     "swig": "^1.4.2"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-minify": "^3.1.0"
   }
 }
