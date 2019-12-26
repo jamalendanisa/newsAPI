@@ -103,7 +103,6 @@ button:disabled {
 @media only screen and (max-width: 500px) {
   .login-box {
     width: 65%;
-    height: 50%;
   }
 
   .round1 {

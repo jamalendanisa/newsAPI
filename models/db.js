@@ -1,21 +1,21 @@
 const mysql = require("mysql");
 
 // Use this config env to run this application locally
-//const dbConfig = require("../config/db.config.js");
-// const pool = mysql.createPool({
-//   host: dbConfig.HOST,
-//   user: dbConfig.USER,
-//   password: dbConfig.PASSWORD,
-//   database: dbConfig.DB
-// }); 
+const dbConfig = require("../config/db.config.js");
+const pool = mysql.createPool({
+  host: dbConfig.HOST,
+  user: dbConfig.USER,
+  password: dbConfig.PASSWORD,
+  database: dbConfig.DB
+}); 
 
 // Create a connection to the database
-const pool = mysql.createPool({
-  host     : process.env.MYSQL_ADDON_HOST,
-  database : process.env.MYSQL_ADDON_DB,
-  user     : process.env.MYSQL_ADDON_USER,
-  password : process.env.MYSQL_ADDON_PASSWORD
-});
+// const pool = mysql.createPool({
+//   host     : process.env.MYSQL_ADDON_HOST,
+//   database : process.env.MYSQL_ADDON_DB,
+//   user     : process.env.MYSQL_ADDON_USER,
+//   password : process.env.MYSQL_ADDON_PASSWORD
+// });
 
 // open the MySQL connection and create database and table if doesn't exist
 // This instantiates the pool once, then exports a method named query.

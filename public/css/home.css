@@ -1,10 +1,11 @@
 /* Header */
+
 .home-topbar {
   background: linear-gradient(to right, #55EEFE 0%, #e76bffd1 100%);
   position: fixed;
   width: 100%;
   z-index: 2;
-  margin-top: -65px;
+  margin-top: -70px;
 }
   
 .home-navbar {
@@ -116,7 +117,7 @@ a {
   background: #f2f7f8;
   margin-left: 240px;
   min-height: 629px;
-  margin-top: 65px;
+  margin-top: 50px;
 }
 
 .page-container {
@@ -265,12 +266,23 @@ button:disabled {
 }
 
 @media only screen and (max-width: 500px) {
+  .home-container {
+    position: absolute;
+    top: 65px;
+  }
+  
   .home-topbar {
-    margin-top: -25%;
+    margin-top: -20px;
+  }
+
+  .home-topbar, .home-navbar {
+    height: 55px;
+    top: 20px;
   }
 
   .home-navbar-header {
     width: 25% !important;
+    height: 55px;
   }
 
   .home-navbar-profile {
@@ -278,16 +290,24 @@ button:disabled {
   }
 
   .home-left-sidebar {
+    padding-top: 50px;
     width: 100%;
+    text-align: center;
   }
 
   .logo img {
     width: 90%;
-    padding-top: 20px;
+    padding-top: 12px;
   }
 
   .username {
     font-size: 4vw;
+  }
+
+  .user-icon {
+    width: 30px;
+    height: 65px;
+    padding-top: 20px;
   }
 
   ul {
@@ -296,20 +316,25 @@ button:disabled {
   }
 
   li {
-    padding: 20px 15px;
+    width: 33.3%;
+    padding: 20px 10px;
   }
 
   .page-wrapper {
-    margin-left: 10px;
-    margin-top: 25%;
+    margin-left: 0;
+    margin-top: 50px;
+    width: 100%;
+    pointer-events: none;
   }
 
   .page-container {
-    padding-top: 13%;
+    padding: 0;
   }
 
   .content-container {
-    min-width: 0;
+    width: 93%;
+    min-width: unset !important;
+    margin: 0 auto !important;
   }
 
   .date {
@@ -320,10 +345,18 @@ button:disabled {
     width: 50%;
     margin-right: 10px;
   }
+
+  #add-news-content {
+    width: 106%;
+  }
+
+  #addNewsForm {
+    padding: 0 30px;
+  }
 }
 
-@media only screen and (max-width: 320px){
+@media only screen and (max-width: 375px) {
   .page-container {
-      padding-top: 30%;
+      padding-top: 30px !important;
   }
 }
