@@ -1,6 +1,28 @@
-# CMS News
+# Idealump Creative Test
 
-## This is Client and API Service for **CMS News App**
+## Front Page
+#### Using React.js Redux Saga
+```
+ https://idealump-news.cleverapps.io/
+```
+
+### Sections
+
+#### Weather API
+This Weather API using [Dark Sky Weather API](https://darksky.net/dev)
+
+#### Map API
+This Map API using [React Leaflet](https://react-leaflet.js.org/) and Tiles from [MapBox](https://www.mapbox.com/)
+
+#### Scraping
+The scrapping function is using [Puppeteer](https://github.com/puppeteer/puppeteer) and [Cheerio](https://cheerio.js.org/)
+
+#### CMS News
+The data are form CMS side
+
+
+
+## CMS
 
 ## Client Side
 
@@ -110,12 +132,16 @@ With data :
 GET https://idealump-news.cleverapps.io/delete/news/:id
 ```
 
-
-### Data scraping
+### Run Data scraping
+The scraping function is automaticaly run everyday at 12AM but could be manually triggered using this link
 ```
 GET https://idealump-news.cleverapps.io/scrapedata
 ```
 
+### Get Scraped Data
+```
+GET https://idealump-news.cleverapps.io/datascraped
+```
 
 
 ***The database's environment is for deployment on the cloud purpose. 
