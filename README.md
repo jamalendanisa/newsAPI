@@ -24,9 +24,9 @@ The data are form CMS side
 
 ## CMS
 
-## Client Side
+### Client Side
 
-### Login User
+#### Login User
 ```
  https://idealump-news.cleverapps.io/cms
 ```
@@ -37,30 +37,30 @@ Login with data :
 }
 ```
 
-### NEWS LIST
+#### NEWS LIST
 ```
  https://idealump-news.cleverapps.io/cms
 ```
 
-### ADD NEWS
+#### ADD NEWS
 ```
  https://idealump-news.cleverapps.io/addnews
 ```
 
-### EDIT NEWS
+#### EDIT NEWS
 ```
  https://idealump-news.cleverapps.io/editnews/:id
 ```
 
-### DELETE NEWS
+#### DELETE NEWS
 ```
  https://idealump-news.cleverapps.io/delete/news/:id
 ```
 
 
-## API Services
+### API Services
 
-### Login User
+#### Login User
 ```
 POST https://idealump-news.cleverapps.io/login/
 ```
@@ -71,13 +71,13 @@ With data :
 }
 ```
 
-### Logout
+#### Logout
 ```
 GET https://idealump-news.cleverapps.io/logout/
 
 ```
 
-### Create User
+#### Create User
 ```
 POST https://idealump-news.cleverapps.io/users/
 ```
@@ -89,17 +89,17 @@ With data :
 }
 ```
 
-### Retrieve News
+#### Retrieve News
 ```
 GET https://idealump-news.cleverapps.io/news/?limit=?&page=?&search=?
 ```
 
-### Retrieve a News with id
+#### Retrieve a News with id
 ```
 GET https://idealump-news.cleverapps.io/news/:id
 ```
 
-### Create a new News
+#### Create a new News
 ```
 POST https://idealump-news.cleverapps.io/news/
 ```
@@ -113,7 +113,7 @@ With data :
 }
 ```
 
-### Update a News with id
+#### Update a News with id
 ```
 POST https://idealump-news.cleverapps.io/news/:id
 ```
@@ -127,18 +127,18 @@ With data :
 }
 ```
 
-### Delete a News with id
+#### Delete a News with id
 ```
 GET https://idealump-news.cleverapps.io/delete/news/:id
 ```
 
-### Run Data scraping
+#### Run Data scraping
 The scraping function is automaticaly run everyday at 12AM but could be manually triggered using this link
 ```
 GET https://idealump-news.cleverapps.io/scrapedata
 ```
 
-### Get Scraped Data
+#### Get Scraped Data
 ```
 GET https://idealump-news.cleverapps.io/datascraped
 ```
