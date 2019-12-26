@@ -1,7 +1,7 @@
 const mysql = require("mysql");
 
 // Use this config env to run this application locally
-// const dbConfig = require("../config/db.config.js");
+//const dbConfig = require("../config/db.config.js");
 // const pool = mysql.createPool({
 //   host: dbConfig.HOST,
 //   user: dbConfig.USER,
