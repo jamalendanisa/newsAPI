@@ -17,7 +17,7 @@ exports.create = (req, res) => {
     date_from: req.body.dateFrom,
     date_to: req.body.dateTo,
     status: req.body.status,
-    created_at: moment().format('YYYY-MM-DD hh:mm:ss')
+    created_at: moment().format('YYYY-MM-DD HH:mm:ss')
   });
 
   // Save News in the database
@@ -90,7 +90,7 @@ exports.update = (req, res) => {
     date_from: req.body.dateFrom,
     date_to: req.body.dateTo,
     status: req.body.status,
-    updated_at: moment().format('YYYY-MM-DD hh:mm:ss')
+    updated_at: moment().format('YYYY-MM-DD HH:mm:ss')
   });
 
   News.updateById(
