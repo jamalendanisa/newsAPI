@@ -85,7 +85,7 @@ $(document).ready( function() {
 
     // Date column custom render
     function dateFormatter( value, row, index ) {
-      return moment(value).format('YYYY-MM-DD hh:mm:ss');
+      return moment(value).format('YYYY-MM-DD HH:mm:ss');
     };
         
     // Show edit news page
@@ -175,13 +175,13 @@ $(document).ready( function() {
   
   // Define Date time picker
   $("#date-from").datetimepicker({
-    format: "YYYY-MM-DD hh:mm:ss",
+    format: "YYYY-MM-DD HH:mm:ss",
     locale : 'jp',
     sideBySide : true,
     ignoreReadonly : true
   });
   $("#date-to").datetimepicker({
-    format: "YYYY-MM-DD hh:mm:ss",
+    format: "YYYY-MM-DD HH:mm:ss",
     locale : 'jp',
     sideBySide : true,
     ignoreReadonly : true
