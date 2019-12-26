@@ -73,9 +73,9 @@ server.on('listening', function () {
   onListening
 
   // call scraping data and run it everyday at 12 AM
- console.log('start scraping data')
  cron.schedule('0 0 0 * * *', () => {
-   console.log('running scrape data task every 30 minutes');
+   console.log('running scrape data task everyday at 12 AM');
+   console.log('start scraping data')
   scrape.data();
  });
 });
