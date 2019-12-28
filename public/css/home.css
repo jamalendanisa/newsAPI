@@ -1,11 +1,14 @@
 /* Header */
+.home-container {
+  height: 100%;
+}
 
 .home-topbar {
   background: linear-gradient(to right, #55EEFE 0%, #e76bffd1 100%);
   position: fixed;
   width: 100%;
   z-index: 2;
-  margin-top: -70px;
+  margin-top: -50px;
 }
   
 .home-navbar {
@@ -116,12 +119,12 @@ a {
 .page-wrapper {
   background: #f2f7f8;
   margin-left: 240px;
-  min-height: 629px;
+  height: 100%;
   margin-top: 50px;
 }
 
 .page-container {
-  padding: 25px 30px;
+  padding: 40px;
   position: relative;
   z-index: 3;
 }

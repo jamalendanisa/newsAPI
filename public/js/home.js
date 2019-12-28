@@ -28,6 +28,18 @@ $(document).ready( function() {
     $("#news-list-content").addClass("show");
     $("#news-list").addClass("active-menu");
     $("#add-news-content").addClass("hide");
+    
+    // Cross-site Scripting prevention
+    String.prototype.escape = function() {
+      var tagsToReplace = {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;'
+      };
+      return this.replace(/[&<>]/g, function(tag) {
+          return tagsToReplace[tag] || tag;
+      });
+    };
 
     // Table definition and settings
     $('#news-table').bootstrapTable({
@@ -64,7 +76,8 @@ $(document).ready( function() {
         formatter: dateFormatter
       }, {
         field: 'news_content',
-        title: 'NEWS'
+        title: 'NEWS',
+        formatter: textFormatter
       }, {
         field: 'id',
         title: '',
@@ -83,9 +96,15 @@ $(document).ready( function() {
       }
     };
 
+    // News Content column custom render
+    function textFormatter( value, row, index ) {
+      return (value).escape();
+    };
+
     // Date column custom render
     function dateFormatter( value, row, index ) {
-      return moment(value).format('YYYY-MM-DD HH:mm:ss');
+      let date = moment(value).format('YYYY-MM-DD HH:mm:ss');
+      return (date).escape();
     };
         
     // Show edit news page
