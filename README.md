@@ -1,5 +1,3 @@
-# Idealump Creative Test
-
 ## Front Page
 #### Using React.js Redux Saga
 ```
