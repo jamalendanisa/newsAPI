@@ -131,11 +131,10 @@ app.get('/addnews', function(req, res) {
   }
 });
 
-// Get data from the Dark Sky API.
+// Get data from the Open Weather API.
 app.get('/weather', function(req, res) {
-  let requestUrl = config.URL + '/' + config.API_KEY + '/' +
-      config.LAT + ',' + config.LANG + config.QUERY;
-
+  let requestUrl = config.URL + '?lat=' + config.LAT + '&lon=' + config.LANG+ 
+  '&units=metric&appid=' + config.API_KEY;
   axios.get(requestUrl)
     .then(function(data) {
       res.status(200).json(data.data);

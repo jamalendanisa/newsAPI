@@ -38,7 +38,9 @@ exports.data = (req, res) => {
     await cluster.task(async ({ page, data: url }) => {
       await page.goto(url,  { timeout : 0, waitUntil: 'domcontentloaded' });
       console.log('detail page loaded')
-      const content = await page.$eval('.newsTxt', newsText => newsText.innerText.trim());
+    
+      const content = await page.$eval('.c-block02-aticle', newsText => newsText.innerText.trim());
+     
       return content;
     });
     
@@ -52,7 +54,7 @@ exports.data = (req, res) => {
     console.log('page loaded');
 
     // Get Page HTML content
-    const html = await page.waitForSelector('section[id="shop"] > a', {timeout : 0})
+    const html = await page.waitForSelector('li[class="c-card01--row4"] > a', {timeout : 0})
       .then(() => { console.log('page fully loaded');
         return page.content()
       }).catch(async()=>{
@@ -64,15 +66,17 @@ exports.data = (req, res) => {
     const data = [];
 
     // Loop through links
-    $('section[id="shop"] > a').each(async function () {      
+    $('li[class="c-card01--row4"] > a').each(async function () {      
       try {  
         let item = $(this);
+
         console.log('Get data items');
         // Get all data items
-        let image = 'http://www.lumine.ne.jp' + item.find(".topicsImg > img").attr('src');
-        let title = item.find('.topicsInfo').children()[0].next.data.trim();
-        let date = item.find('.date').text(); 
-        let urlDetail = url + item.attr('href');
+        let image = item.find(".c-img01 > img").attr('src');
+        let title = item.find('.c-card01__txt02').text();
+        let date = item.find('.c-card01__txt03').text(); 
+        let urlDetail = 'http://www.lumine.ne.jp' + item.attr('href');
+        
         let detail = await cluster.execute(urlDetail);
        
         if (detail == undefined) {

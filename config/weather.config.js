@@ -1,7 +1,7 @@
 module.exports = {
-  URL: "https://api.darksky.net/forecast",
-  API_KEY: "69647bf9ffcfe6d45ced16b5f4ffe68f",
+  URL: "https://api.openweathermap.org/data/2.5/forecast",
+  API_KEY: "1b237f15cdda8c167ac5c0de246d81de",
   LAT: "35.652832",
   LANG: "139.839478",
-  QUERY: "?lang=ja&units=auto&exclude=minutely,hourly"
-};
+  QUERY: "&lang=ja&units=auto&exclude=minutely,hourly"
+}

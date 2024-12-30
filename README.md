@@ -1,13 +1,23 @@
 ## Front Page
 #### Using React.js Redux Saga
 ```
- https://idealump-news.cleverapps.io/
+jamalendanisa.github.io
+```
+Login :
+```
+{ "username":"idealump",
+  "password":"idealump"
+}
 ```
 
+```
+Front End Code
+https://github.com/jamalendanisa/idealump-news
+```
 ### Sections
 
 #### Weather API
-This Weather API using [Dark Sky Weather API](https://darksky.net/dev)
+This Weather API using [Open Weather API](https://openweathermap.org/)
 
 #### Map API
 This Map API using [React Leaflet](https://react-leaflet.js.org/) and Tiles from [MapBox](https://www.mapbox.com/)
@@ -26,7 +36,7 @@ The data are form CMS side
 
 #### Login User
 ```
- https://idealump-news.cleverapps.io/cms
+/cms
 ```
 Login with data :
 ```
@@ -37,22 +47,22 @@ Login with data :
 
 #### NEWS LIST
 ```
- https://idealump-news.cleverapps.io/cms
+/cms
 ```
 
 #### ADD NEWS
 ```
- https://idealump-news.cleverapps.io/addnews
+/addnews
 ```
 
 #### EDIT NEWS
 ```
- https://idealump-news.cleverapps.io/editnews/:id
+/editnews/:id
 ```
 
 #### DELETE NEWS
 ```
- https://idealump-news.cleverapps.io/delete/news/:id
+/delete/news/:id
 ```
 
 
@@ -60,7 +70,7 @@ Login with data :
 
 #### Login User
 ```
-POST https://idealump-news.cleverapps.io/login/
+POST /login/
 ```
 With data :
 ```
@@ -71,13 +81,13 @@ With data :
 
 #### Logout
 ```
-GET https://idealump-news.cleverapps.io/logout/
+GET /logout/
 
 ```
 
 #### Create User
 ```
-POST https://idealump-news.cleverapps.io/users/
+POST /users/
 ```
 With data :
 ```
@@ -89,17 +99,17 @@ With data :
 
 #### Retrieve News
 ```
-GET https://idealump-news.cleverapps.io/news/?limit=?&page=?&search=?
+GET /news/?limit=?&page=?&search=?
 ```
 
 #### Retrieve a News with id
 ```
-GET https://idealump-news.cleverapps.io/news/:id
+GET /news/:id
 ```
 
 #### Create a new News
 ```
-POST https://idealump-news.cleverapps.io/news/
+POST /news/
 ```
 With data :
 ```
@@ -113,7 +123,7 @@ With data :
 
 #### Update a News with id
 ```
-POST https://idealump-news.cleverapps.io/news/:id
+POST /news/:id
 ```
 With data :
 ```
@@ -127,18 +137,18 @@ With data :
 
 #### Delete a News with id
 ```
-GET https://idealump-news.cleverapps.io/delete/news/:id
+GET /delete/news/:id
 ```
 
 #### Run Data scraping
 The scraping function is automaticaly run everyday at 12AM but could be manually triggered using this link
 ```
-GET https://idealump-news.cleverapps.io/scrapedata
+GET /scrapedata
 ```
 
 #### Get Scraped Data
 ```
-GET https://idealump-news.cleverapps.io/datascraped
+GET /datascraped
 ```
 
 

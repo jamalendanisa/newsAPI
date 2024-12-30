@@ -44,10 +44,10 @@ exports.findAll = (req, res) => {
           err.message || "Some error occurred while retrieving news."
       });
     else { 
-      if (data.rows.length !== 0)
-        req.session.newNewsId = parseInt(data.rows[0].id) + 1;
-      else
+      if (data == undefined || data?.rows?.length === 0)
         req.session.newNewsId = 1;
+      else
+        req.session.newNewsId = parseInt(data.rows[0].id) + 1;
       res.send(data);
     }
   });
