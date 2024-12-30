@@ -40,8 +40,8 @@ The data are form CMS side
 ```
 Login with data :
 ```
-{ "email":"your@email.com",
-  "password":"yourpassword"
+{ "email":"idea@idealump.com",
+  "password":"idealump"
 }
 ```
 
