@@ -10,8 +10,8 @@ Login :
 }
 ```
 
-```
 Front End Code
+```
 https://github.com/jamalendanisa/idealump-news
 ```
 ### Sections
