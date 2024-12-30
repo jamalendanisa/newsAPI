@@ -1,7 +1,7 @@
 ## Front Page
 #### Using React.js Redux Saga
 ```
-jamalendanisa.github.io
+idealump-news.cleverapps.io/
 ```
 Login :
 ```
